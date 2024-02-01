@@ -1,51 +1,28 @@
 #!/usr/bin/python3
-
 """
-Determines if a given data set represents a valid UTF-8 encoding.
+UTF-8 Validation
 """
 
-from typing import List
 
-def valid_utf8(data: List[int]) -> bool:
+def validUTF8(data) -> bool:
     """
-    Determines if a given data set represents a valid UTF-8 encoding.
-
-    Args:
-        data (List[int]): List of integers representing the data.
-
-    Returns:
-        bool: True if data is a valid UTF-8 encoding, else False.
+    Returns True if data is a valid UTF-8 encoding, else return False
+    :param data:
+    :return:
     """
-    # Number of continuation bytes for the current UTF-8 character
-    continuation_bytes = 0
-
+    num_bytes = 0
     for byte in data:
-        # Check if the byte is a continuation byte
-        if 128 <= byte <= 191:
-            if continuation_bytes == 0:
-                # If there is no corresponding start byte, it's invalid
-                return False
-            continuation_bytes -= 1
-        else:
-            # Check for the number of continuation bytes based on the first byte
-            if continuation_bytes > 0:
-                return False
-            if byte < 128:
-                # ASCII character, no continuation bytes expected
+        mask = 1 << 7
+        if not num_bytes:
+            while byte & mask:
+                num_bytes += 1
+                mask >>= 1
+            if not num_bytes:
                 continue
-            elif byte < 192:
-                # Invalid start byte, as it should be followed by a continuation byte
+            if num_bytes == 1 or num_bytes > 4:
                 return False
-            elif byte < 224:
-                continuation_bytes = 1
-            elif byte < 240:
-                continuation_bytes = 2
-            elif byte < 248:
-                continuation_bytes = 3
-            else:
-                # Invalid start byte, as UTF-8 supports up to 4-byte characters
+        else:
+            if byte >> 6 != 0b10:
                 return False
-
-    return continuation_bytes == 0
-
-
+        num_bytes -= 1
+    return num_bytes == 0
