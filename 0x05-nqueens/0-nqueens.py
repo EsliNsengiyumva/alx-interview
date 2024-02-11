@@ -5,6 +5,7 @@ N queens
 
 import sys
 
+
 if len(sys.argv) != 2:
     print('Usage: nqueens N')
     exit(1)
@@ -12,11 +13,11 @@ if len(sys.argv) != 2:
 try:
     n_q = int(sys.argv[1])
 except ValueError:
-    print('N must ba a number')
+    print('N must be a number')  # Fixed typo in the error message
     exit(1)
 
 if n_q < 4:
-    print('N must ba at least 4')
+    print('N must be at least 4')  # Fixed typo in the error message
     exit(1)
 
 
@@ -35,8 +36,8 @@ def attack_queen(square, queen):
     '''self descriptive'''
     (row1, col1) = square
     (row2, col2) = queen
-    return (row1 == row2) or (col1 == col2) or\
-        abs(row1 - row2) == abs(col1 - col2)
+    return (row1 == row2) or (col1 == col2) or \
+        abs(row1 - row2) == abs(col1 - col2)  # Added space around operators
 
 
 def safe_queen(sqr, queens):
