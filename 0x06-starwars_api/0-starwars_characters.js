@@ -14,7 +14,7 @@
 			      let character = await (await request(urlCharacter)).body;
 			      character = JSON.parse(character);
 			      console.log(character.name);
-			    }
+		  }
 	}
 
 starwarsCharacters(filmID);
