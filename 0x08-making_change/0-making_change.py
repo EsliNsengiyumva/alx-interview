@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-def make_change(coins, total):
+def makeChange(coins, total):
     dp = [float('inf')] * (total + 1)
     dp[0] = 0
 
@@ -12,5 +12,3 @@ def make_change(coins, total):
         return -1
     else:
         return dp[total]
-
-
