@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-    Check if a number is prime
+Game of a prime number
 """
+
 
 def is_prime(num):
     """
@@ -47,7 +48,8 @@ def isWinner(x, nums):
         nums (list): A list of numbers representing the rounds.
 
     Returns:
-        str or None: The overall winner ("Maria" or "Ben"), or None in case of a tie.
+        str or None: The overall winner ("Maria" or "Ben")
+        , or None in case of a tie.
     """
     maria_wins = 0
     ben_wins = 0
